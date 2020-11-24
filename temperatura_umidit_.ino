@@ -1,9 +1,9 @@
 #include <SimpleDHT.h>
 #include <LiquidCrystal.h>
-// for DHT11,
-//      VCC: 5V or 3V
-//      GND: GND
-//      DATA: 2
+// DHT11,
+// VCC: 5V or 3V
+// GND: GND
+// DATA: 2
 
 #define DHTPIN 7
 SimpleDHT11 dht11;
@@ -21,13 +21,13 @@ void setup() {
 
 void loop() {
   Serial.println("");
-  Serial.println("Calcolando...");
+  Serial.println("Scanning...");
 
   byte temp = 0;
   byte umid = 0;
   int err = SimpleDHTErrSuccess;
   if ((err = dht11.read(DHTPIN, &temp, &umid, NULL)) != SimpleDHTErrSuccess) {
-    Serial.print("Lettura fallita, err=");
+    Serial.print("Read failed, err=");
     Serial.println(err);
     delay(1000);
     return;
@@ -45,17 +45,16 @@ void loop() {
     delay(1000);
   }
 
-  Serial.print("Temperatura: ");
+  Serial.print("Temperature: ");
   Serial.print((int)temp); Serial.print(" *C, ");
   Serial.print((int)umid); Serial.println(" H");
   if (temp > 30) {
-    Serial.print("Temperatura oltre il limite!");
+    Serial.print("Temperature over the limit!");
   }
   else {
-    Serial.print("Temperatura nella norma!");
+    Serial.print("Normal temperature!");
   }
 
-  // DHT11 sampling rate is 1HZ.
   delay(1500);
 
   
